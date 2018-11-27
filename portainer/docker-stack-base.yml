@@ -1,0 +1,23 @@
+version: '3.6'
+
+networks:
+  network:
+    driver: overlay
+
+volumes:
+  portainer-data:
+    driver: local
+
+services:
+
+  portainer:
+    image: portainer/portainer
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer-data:/data
+    networks:
+      - network

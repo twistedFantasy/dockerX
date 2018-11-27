@@ -1,0 +1,41 @@
+version: '3.6'
+
+networks:
+  network:
+    driver: overlay
+
+volumes:
+  mongodb-data:
+    driver: local
+
+services:
+
+  mongodb:
+    image: mongo:4.1.5-xenial
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+    volumes:
+      - mongodb-data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: user
+      MONGO_INITDB_ROOT_PASSWORD: g9sJBHiq79L4n9O3
+    networks:
+      - network
+
+  mongodb-express:
+    image: mongo-express:0.49.0
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+    environment:
+      ME_CONFIG_BASICAUTH_USERNAME: root
+      ME_CONFIG_BASICAUTH_PASSWORD: LPBZsPKM1iTE
+      ME_CONFIG_MONGODB_SERVER: mongodb
+      ME_CONFIG_MONGODB_PORT: 27017
+      ME_CONFIG_MONGODB_ADMINUSERNAME: user
+      ME_CONFIG_MONGODB_ADMINPASSWORD: g9sJBHiq79L4n9O3
+    networks:
+      - network

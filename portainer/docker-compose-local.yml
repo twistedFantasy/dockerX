@@ -1,0 +1,22 @@
+version: '3.6'
+
+networks:
+  network:
+    driver: bridge
+
+volumes:
+  portainer-data:
+    driver: local
+
+services:
+
+  portainer:
+    image: portainer/portainer
+    ports:
+      - 9009:9000
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer-data:/data
+    networks:
+      - network
+

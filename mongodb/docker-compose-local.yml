@@ -1,0 +1,35 @@
+version: '3.6'
+
+networks:
+  network:
+    driver: bridge
+
+volumes:
+  mongodb-data:
+    driver: local
+
+services:
+
+  mongodb:
+    image: mongo:4.1.5-xenial
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb-data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: user
+      MONGO_INITDB_ROOT_PASSWORD: g9sJBHiq79L4n9O3
+    networks:
+      - network
+
+  mongodb-express:
+    image: mongo-express:0.49.0
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_SERVER: mongodb
+      ME_CONFIG_MONGODB_PORT: 27017
+      ME_CONFIG_MONGODB_ADMINUSERNAME: user
+      ME_CONFIG_MONGODB_ADMINPASSWORD: g9sJBHiq79L4n9O3
+    networks:
+      - network

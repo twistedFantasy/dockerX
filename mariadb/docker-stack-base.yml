@@ -1,0 +1,24 @@
+version: '3.6'
+
+networks:
+  network:
+    driver: overlay
+
+volumes:
+  mariadb-data:
+    driver: local
+
+
+services:
+
+  mariadb:
+    image: "$CI_REGISTRY_IMAGE/mariadb:$CI_COMMIT_REF_SLUG"
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+    volumes:
+      - mariadb-data:/var/lib/mysql
+    networks:
+      - network
+

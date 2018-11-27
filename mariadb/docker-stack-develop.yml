@@ -1,0 +1,12 @@
+version: '3.6'
+
+services:
+
+  mariadb:
+    environment:
+      - MYSQL_ROOT_PASSWORD=Yi6vLzVYgoqIg89R
+      - MYSQL_DATABASE=fomular_assistent_database
+      - MYSQL_USER=fomular_assistent_user
+      - MYSQL_PASSWORD=v9Lvu3qpnFoagie7
+    ports:
+      - 3336:3306
