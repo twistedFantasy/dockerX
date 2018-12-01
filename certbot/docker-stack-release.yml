@@ -1,0 +1,37 @@
+version: "3.6"
+
+networks:
+  network:
+    driver: overlay
+
+volumes:
+  certbot-data:
+    driver: local
+  webroot-data:
+    driver: local
+
+services:
+  certbot:
+    image: "$CI_REGISTRY_IMAGE/certbot:$CI_COMMIT_REF_SLUG"
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+    volumes:
+      - certbot-data:/etc/letsencrypt
+      - webroot-data:/var/www/frontend/.well-known/
+    networks:
+      - network
+
+  nginx:
+    image: "$CI_REGISTRY_IMAGE/nginx:$CI_COMMIT_REF_SLUG"
+    deploy:
+      replicas: 2
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - certbot-data:/etc/letsencrypt:ro
+      - webroot-data:/usr/share/nginx/html/letsencrypt:ro
+    networks:
+      - network

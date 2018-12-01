@@ -1,6 +1,6 @@
 ARG IMAGE
 FROM $IMAGE
-LABEL maintainer="Twisted Fantasy <twisteeed.fantasy@gmail.com>"
+LABEL maintainer="Denis Sventitsky <denis.sventitsky@gmail.com>"
 
 ENV CRON_PATH=/etc/cron.d/hello-cron
 # Add crontab file in the cron directory

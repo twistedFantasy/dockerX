@@ -1,5 +1,5 @@
 FROM mariadb:10.3.9
-LABEL maintainer="Twisted Fantasy <twisteeed.fantasy@gmail.com>"
+LABEL maintainer="Denis Sventitsky <denis.sventitsky@gmail.com>"
 
 EXPOSE 3306
 

@@ -1,0 +1,1 @@
+0 2 * * 6 certbot certonly -n -m oliver@profundus.de --agree-tos --renew-by-default --webroot -w /var/www/frontend/ -d test.com -d www.test.com -d subtest.test.com

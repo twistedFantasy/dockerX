@@ -1,0 +1,33 @@
+image: docker:18.06.1
+
+variables:
+  DOCKER_DRIVER: overlay2
+  DOCKER_VERSION: docker:18.06.1
+
+services:
+  - docker:dind
+
+stages:
+  - compile
+  - build
+  - deploy
+
+.docker_login: &docker_login
+  before_script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+
+build-content-certbot:
+  <<: *docker_login
+  stage: build
+  script:
+    - docker build --build-arg BRANCH=${CI_COMMIT_REF_SLUG} -f certbot/Dockerfile --pull -t "$CI_REGISTRY_IMAGE/certbot:$CI_COMMIT_REF_SLUG" .
+    - docker push "$CI_REGISTRY_IMAGE/certbot:$CI_COMMIT_REF_SLUG"
+  tags:
+    - test1
+  only:
+    refs:
+      - master
+      - release
+    changes:
+      - .gitlab-ci.yml
+      - certbot/**/*

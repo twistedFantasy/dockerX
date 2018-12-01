@@ -1,5 +1,5 @@
 ARG IMAGE
 FROM $IMAGE
-LABEL maintainer="Twisted Fantasy <twisteeed.fantasy@gmail.com>"
+LABEL maintainer="Denis Sventitsky <denis.sventitsky@gmail.com>"
 
 CMD tail -f /dev/null
