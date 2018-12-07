@@ -1,0 +1,28 @@
+version: "3.6"
+
+networks:
+  network:
+    driver: bridge
+
+volumes:
+  postgres-data:
+    driver: local
+
+services:
+
+  postgres:
+    build:
+      context: ../
+      dockerfile: dockerX/postgresql/Dockerfile
+    container_name: postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres-data:/postgresql/data
+    environment:
+      - PGDATA=/postgresql/data
+      - POSTGRES_USER=test_user
+      - POSTGRES_PASSWORD=ksadgoiwae3lfadsf
+      - POSTGRES_DB=test_database
+    networks:
+      - network
