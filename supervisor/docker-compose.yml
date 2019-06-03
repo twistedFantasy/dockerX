@@ -1,0 +1,32 @@
+version: '3.7'
+
+networks:
+  network:
+    driver: bridge
+
+volumes:
+  redis-data:
+
+services:
+  supervisor:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      args:
+          IMAGE: "python:3.7.3"
+          COMMAND: "/usr/local/bin/supervisord -c /etc/supervisord.conf"
+    restart: on-failure
+    env_file:
+      - develop.env
+    depends_on:
+      - redis
+    networks:
+      - network
+
+  redis:
+    image: "redis:5.0.5-alpine"
+    volumes:
+      - redis-data:/data
+    networks:
+      - network
+

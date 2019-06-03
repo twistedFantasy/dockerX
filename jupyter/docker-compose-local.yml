@@ -1,0 +1,16 @@
+version: '3.7'
+
+networks:
+  network:
+    driver: bridge
+
+services:
+    simple_demo:
+      image: "jupyter/minimal-notebook"
+      command: jupyter notebook --NotebookApp.token='' --NotebookApp.password=''
+      restart:
+          on-failure
+      ports:
+          - 8888:8888
+      networks:
+        - network

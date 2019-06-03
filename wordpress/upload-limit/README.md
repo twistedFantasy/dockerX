@@ -1,0 +1,1 @@
+Change wordpress apache upload file limit to 32M

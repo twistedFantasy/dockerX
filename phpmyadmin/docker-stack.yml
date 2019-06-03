@@ -1,0 +1,18 @@
+version: '3.7'
+
+networks:
+  core:
+    external: true
+
+services:
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:4.8
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+    environment:
+      MA_ABSOLUTE_URI: http://X.X.X.X/phpmyadmin/
+      PMA_HOSTS: test_mysql,test2_mysql,test3_mysql
+    networks:
+      - core

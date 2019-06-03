@@ -1,0 +1,45 @@
+version: '3.7'
+
+networks:
+  core:
+    external: true
+
+volumes:
+  mysql:
+  ftp-passwd:
+
+services:
+  mysql:
+    image: ${MYSQL_IMAGE}
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+    volumes:
+      - mysql:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: database
+      MYSQL_USER: user
+      MYSQL_PASSWORD: example
+      MYSQL_ROOT_PASSWORD: example
+    networks:
+      - core
+
+  ftpd-server:
+    image: ${FTP_IMAGE}
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+    volumes:
+      - ftp-passwd:/etc/pure-ftpd/passwd
+    environment:
+      PUBLICHOST: "IP_ADDRESS"
+      FTP_USER_NAME: ftp_user
+      FTP_USER_PASS: example
+      FTP_USER_HOME: /home/ftp_user
+    ports:
+      - 21:21
+      - 30000-30009:30000-30009
+    networks:
+      - core

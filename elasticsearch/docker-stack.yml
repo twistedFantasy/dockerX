@@ -1,0 +1,27 @@
+version: "3.6"
+
+networks:
+  network:
+    driver: overlay
+
+volumes:
+  elasticsearch-data:
+    driver: local
+
+services:
+  elasticsearch:
+    image: elasticsearch:6.6.2
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+    environment:
+      - "ES_JAVA_OPTS=-Xms2g -Xmx2g"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    networks:
+      - network

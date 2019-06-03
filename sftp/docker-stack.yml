@@ -1,0 +1,30 @@
+version: '3.7'
+
+networks:
+  core:
+    external: true
+
+volumes:
+  data:
+  ftp-passwd:
+
+services:
+  ftpd-server:
+    image: ${FTP_IMAGE}
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+    volumes:
+      - data:/home/ftp_user/
+      - ftp-passwd:/etc/pure-ftpd/passwd
+    environment:
+      PUBLICHOST: "178.63.8.55"
+      FTP_USER_NAME: ftp_user
+      FTP_USER_PASS: example
+      FTP_USER_HOME: /home/ftp_user
+    ports:
+      - 21:21
+      - 30000-30009:30000-30009
+    networks:
+      - core
