@@ -1,0 +1,3 @@
+0 2 * * * root /usr/local/bin/python /usr/src/ssm/ssm/users/cron/notifier.py > /proc/1/fd/1 2>/proc/1/fd/2
+
+# Don't remove the empty line at the end of this file. It is required to run the cron job
