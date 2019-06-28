@@ -1,3 +1,10 @@
+Create new virtual machine with Vagrant
+```
+vagrant up
+vagrant ssh
+cd /vagrant_data/
+```
+
 Increase vm.max_map_count value
 ```
 sudo sysctl -w vm.max_map_count=262144
@@ -5,11 +12,11 @@ sudo sysctl -w vm.max_map_count=262144
 
 Activate docker swarm
 ```
-docker swarm init
+docker swarm init --advertise-addr 192.168.56.101
 ```
 
 ```
-docker stack deploy -c docker-stack-elk.yml test-elk
+docker stack deploy -c docker-stack-elk.yml dockerX-elk
 ```
 
 List of stacks
@@ -24,17 +31,17 @@ docker service ls
 
 Get logs for a service
 ``` 
-docker service logs -f test-elk_elasticsearch
+docker service logs -f dockerX-elk_elasticsearch
 ```
 
 Open Kibana in browser
 ```
-http://localhost:5601/
+http://192.168.56.101:5601/
 ```
 
 Delete a stack
 ``` 
-docker stack rm test-elk
+docker stack rm dockerX-elk
 ```
 
 Remove
