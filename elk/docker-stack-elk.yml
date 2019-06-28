@@ -1,0 +1,81 @@
+version: "3.7"
+
+networks:
+  network:
+    driver: overlay
+
+volumes:
+  elasticsearch-data:
+
+configs:
+  filebeat_config:
+    file: ./filebeat/config/filebeat.yml
+  logstash_config:
+    file: ./logstash/config/logstash.yml
+  logstash_pipeline:
+    file: ./logstash/pipeline/logstash.conf
+  elasticsearch_config:
+    file: ./elasticsearch/config/elasticsearch.yml
+  kibana_config:
+    file: ./kibana/config/kibana.yml
+
+services:
+  filebeat:
+    image: "docker.elastic.co/beats/filebeat:7.2.0"
+    deploy:
+      replicas: 1
+    user: root
+    configs:
+      - source: filebeat_config
+        target: /usr/share/filebeat/filebeat.yml
+    environment:
+      - "ES_JAVA_OPTS=-Xms256m -Xmx256m"
+    volumes:
+      - "/var/lib/docker/containers:/usr/share/dockerlogs/data:ro"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    networks:
+      - network
+
+  logstash:
+    image: "docker.elastic.co/logstash/logstash:7.2.0"
+    deploy:
+      replicas: 1
+    configs:
+      - source: logstash_config
+        target: /usr/share/logstash/config/logstash.yml
+      - source: logstash_pipeline
+        target: /usr/share/logstash/pipeline/logstash.conf
+    environment:
+      - "ES_JAVA_OPTS=-Xms256m -Xmx256m"
+    networks:
+      - network
+
+  elasticsearch:
+    image: "docker.elastic.co/elasticsearch/elasticsearch:7.2.0"
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+    configs:
+      - source: elasticsearch_config
+        target: /usr/share/elasticsearch/config/elasticsearch.yml
+    environment:
+      - "ES_JAVA_OPTS=-Xms2g -Xmx2g"
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+    networks:
+      - network
+
+  kibana:
+    image: "docker.elastic.co/kibana/kibana:7.2.0"
+    deploy:
+      replicas: 1
+    configs:
+      - source: kibana_config
+        target: /usr/share/kibana/config/kibana.yml
+    environment:
+      - "LOGGING_QUIET=true"
+    ports:
+      - "5601:5601"
+    networks:
+      - network

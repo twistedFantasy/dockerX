@@ -1,0 +1,10 @@
+---
+cluster.name: "docker-swarm-logs-cluster"
+network.host: 0.0.0.0
+http:
+  port: 9229
+transport:
+  tcp:
+    port: 9339
+
+discovery.type: single-node  # FIXME: production mode
