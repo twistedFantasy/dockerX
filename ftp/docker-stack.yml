@@ -1,0 +1,29 @@
+version: '3.7'
+
+networks:
+  core:
+    external: true
+
+volumes:
+  ftp-passwd:
+
+services:
+  ftpd-server:
+    image: "stilliard/pure-ftpd:hardened"
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+    volumes:
+      - ftp-passwd:/etc/pure-ftpd/passwd
+    environment:
+      PUBLICHOST: "192.168.33.59"
+      FTP_USER_NAME: ftp_user
+      FTP_USER_PASS: example
+      FTP_USER_HOME: /home/ftp_user
+      FTP_PASSIVE_PORTS: 40020:40029
+    ports:
+      - 53:21
+      - 40020-40029:40020-40029
+    networks:
+      - core
