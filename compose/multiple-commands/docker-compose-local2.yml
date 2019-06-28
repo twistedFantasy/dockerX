@@ -16,12 +16,7 @@ services:
 
   todo:
     image: ${PYTHON_IMAGE}
-    command: >
-      sh -c "cd /usr/src/todo/ &&
-             pip install -r requirements.txt &&
-             python3 /usr/src/scripts/systemuser.py &&
-             python3 manage.py migrate &&
-             python3 manage.py runserver 0.0.0.0:8000"
+    command: bash -c "pip install -r requirements.txt &&  python3 manage.py runserver 0.0.0.0:8000"
     restart: on-failure
     env_file:
       - todo/develop.env
