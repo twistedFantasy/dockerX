@@ -1,6 +1,6 @@
 ARG IMAGE
 FROM $IMAGE
-LABEL maintainer="Denis Sventitsky <denis.sventitsky@gmail.com>"
+LABEL maintainer="Denis Sventitsky <denis.sventitsky@gmail.com> / Twisted Fantasy <twisteeed.fantasy@gmail.com>"
 
 ARG BRANCH
 ADD dockerX/certbot/crontab-$BRANCH /etc/crontabs/root

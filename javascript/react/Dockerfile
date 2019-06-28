@@ -17,7 +17,7 @@ RUN npm run build-prod
 # nginx
 ARG NGINX_IMAGE
 FROM $NGINX_IMAGE
-LABEL maintainer="Denis Sventitsky <denis.sventitsky@gmail.com>"
+LABEL maintainer="Denis Sventitsky <denis.sventitsky@gmail.com> / Twisted Fantasy <twisteeed.fantasy@gmail.com>"
 
 EXPOSE 80
 EXPOSE 443

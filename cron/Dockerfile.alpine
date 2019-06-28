@@ -1,6 +1,6 @@
 ARG IMAGE
 FROM $IMAGE
-LABEL maintainer="Twisted Fantasy <twisteeed.fantasy@gmail.com>"
+LABEL maintainer="Denis Sventitsky <denis.sventitsky@gmail.com> / Twisted Fantasy <twisteeed.fantasy@gmail.com>"
 
 ENV CRON_PATH=/etc/crontabs/root
 ADD cron/crontab-alpine $CRON_PATH

@@ -1,6 +1,6 @@
 ARG IMAGE
 FROM $IMAGE
-LABEL maintainer="Denis Sventitsky <denis.sventitsky@gmail.com>"
+LABEL maintainer="Denis Sventitsky <denis.sventitsky@gmail.com> / Twisted Fantasy <twisteeed.fantasy@gmail.com>"
 
 # apache configuration
 ENV APACHE_DOCUMENT_ROOT /var/www/html/public
