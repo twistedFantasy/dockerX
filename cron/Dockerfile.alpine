@@ -3,7 +3,7 @@ FROM $IMAGE
 LABEL maintainer="Twisted Fantasy <twisteeed.fantasy@gmail.com>"
 
 ENV CRON_PATH=/etc/crontabs/root
-ADD cron/crontab.alpine $CRON_PATH
+ADD cron/crontab-alpine $CRON_PATH
 
 # FIXME: do we need to install all this stuff???
 RUN apk update && apk add dcron curl wget rsync ca-certificates && rm -rf /var/cache/apk/*

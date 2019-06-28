@@ -4,7 +4,7 @@ LABEL maintainer="Denis Sventitsky <denis.sventitsky@gmail.com>"
 
 ENV CRON_PATH=/etc/cron.d/hello-cron
 # Add crontab file in the cron directory
-ADD cron/crontab.ubuntu $CRON_PATH
+ADD cron/crontab-ubuntu $CRON_PATH
 
 # Give execution rights on the cron job
 RUN chmod 0644 $CRON_PATH
