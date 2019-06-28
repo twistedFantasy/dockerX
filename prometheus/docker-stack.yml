@@ -1,0 +1,70 @@
+version: "3.7"
+
+networks:
+  network:
+    driver: overlay
+
+volumes:
+  grafana-data:
+  prometheus-data:
+
+services:
+  nginx:
+    image: "nginx:1.17.0-alpine"
+    deploy:
+      replicas: 1
+    ports:
+      - "80:80"
+    networks:
+      - network
+
+  prometheus:
+    image: "dockerx-prometheus"
+    deploy:
+      replicas: 1
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention=200h'
+      - '--web.enable-lifecycle'
+    ports:
+      - "9090:9090"
+    volumes:
+      - prometheus-data:/prometheus
+    networks:
+      - network
+
+  alertmanager:
+    image: "dockerx-alertmanager"
+    deploy:
+      replicas: 1
+    command:
+      - '--config.file=/etc/alertmanager/config.yml'
+      - '--storage.path=/alertmanager'
+      - '--web.listen-address=0.0.0.0:9093'
+    networks:
+      - network
+
+  blackbox-exporter:
+   image: "prom/blackbox-exporter"
+   deploy:
+     replicas: 1
+   networks:
+     - network
+
+  grafana:
+   image: "dockerx-grafana"
+   deploy:
+     replicas: 1
+   environment:
+    - GF_SECURITY_ADMIN_USER=${ADMIN_USER:-admin}
+    - GF_SECURITY_ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
+    - GF_USERS_ALLOW_SIGN_UP=false
+   ports:
+     - "3000:3000"
+   volumes:
+     - grafana-data:/var/lib/grafana
+   networks:
+     - network

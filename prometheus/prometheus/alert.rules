@@ -1,0 +1,11 @@
+groups:
+
+- name: nginx
+  rules:
+  - alert: nginx_down
+    expr: probe_success{instance="nginx:80",job="nginx"} == 0
+    for: 1s
+    labels:
+      severity: warning
+    annotations:
+      summary: "nginx is down"
