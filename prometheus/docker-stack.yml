@@ -18,6 +18,22 @@ services:
     networks:
       - network
 
+  node-exporter:
+    image: "prom/node-exporter"
+    deploy:
+      replicas: 1
+    user: root
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.sysfs=/host/sys'
+      - '--collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc)($$|/)'
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    networks:
+      - network
+
   prometheus:
     image: "dockerx-prometheus"
     deploy:

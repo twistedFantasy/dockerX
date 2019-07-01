@@ -12,13 +12,22 @@ alerting:
       - alertmanager:9093
 
 rule_files:
-  - "alert.rules"
+  - "cpu.rules"
+  - "disk.rules"
+  - "ram.rules"
+  - "network.rules"
+  - "nginx.rules"
 
 scrape_configs:
   - job_name: 'prometheus'
     scrape_interval: 30s
     static_configs:
       - targets: ['prometheus:9090']
+
+  - job_name: 'node'
+    scrape_interval: 30s
+    static_configs:
+      - targets: ['node-exporter:9100']
 
   - job_name: 'nginx'
     metrics_path: /probe

@@ -1,0 +1,11 @@
+groups:
+- name: ram
+  rules:
+    - alert: low_ram_space
+      expr: (sum(node_memory_MemTotal_bytes) - sum(node_memory_MemFree_bytes + node_memory_Buffers_bytes + node_memory_Cached_bytes) ) / sum(node_memory_MemTotal_bytes) * 100 > 80
+      for: 20m
+      labels:
+        severity: warning
+      annotations:
+        description: 'Low RAM detected'
+        summary: RAM Space Alert
