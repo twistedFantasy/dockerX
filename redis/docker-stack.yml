@@ -1,0 +1,20 @@
+version: '3.7'
+
+networks:
+  network:
+    driver: overlay
+
+volumes:
+  redis-data:
+
+services:
+  redis:
+    image: "redis:5.0.5"
+    deploy:
+      replcas: 1
+      placement:
+        constraints: [node.role == manager]
+    volumes:
+      - redis-data:/data
+    networks:
+      - network
