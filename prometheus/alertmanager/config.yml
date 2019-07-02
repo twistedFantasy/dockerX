@@ -5,21 +5,30 @@ route:
     - match:
         alertname: nginx_down
       receiver: mail-receiver
+
+    - match:
+        alertname: postgres_down
+        receiver: critical-mail-receiver
+
     - match:
         alertname: high_host_cpu_utilisation
       receiver: critical-mail-receiver
+
     - match:
         alertname: low_disk_space
       receiver: critical-mail-receiver
     - match:
         alertname: low_ram_space
       receiver: critical-mail-receiver
+
     - match:
         alertname: unusual_network_throughput_in
       receiver: critical-mail-receiver
+
     - match:
         alertname: unusual_network_throughput_out
       receiver: critical-mail-receiver
+
 
 receivers:
 - name: 'mail-receiver'

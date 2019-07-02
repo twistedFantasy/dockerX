@@ -7,8 +7,8 @@ groups:
       labels:
         severity: warning
       annotations:
-        description: "Host network interfaces are probably receiving too much data (> 100 MB/s)\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
         summary: "Unusual network throughput in (instance {{ $labels.instance }})"
+        description: "Host network interfaces are probably receiving too much data (> 100 MB/s)\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
 
     - alert: unusual_network_throughput_out
       expr: sum by (instance) (irate(node_network_transmit_bytes_total[2m])) / 1024 / 1024 > 1000
@@ -16,5 +16,5 @@ groups:
       labels:
         severity: warning
       annotations:
-        description: "Host network interfaces are probably sending too much data (> 100 MB/s)\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
         summary: "Unusual network throughput out (instance {{ $labels.instance }})"
+        description: "Host network interfaces are probably sending too much data (> 100 MB/s)\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"

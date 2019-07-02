@@ -1,0 +1,11 @@
+groups:
+- name: postgres
+  rules:
+    - alert: postgres_down
+      expr: pg_up == 0
+      for: 30m
+      labels:
+        severity: warning
+      annotations:
+        summary: "PostgreSQL down (instance {{ $labels.instance }})"
+        description: "PostgreSQL instance is down\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"

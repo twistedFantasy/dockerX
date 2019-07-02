@@ -1,0 +1,63 @@
+version: '3.7'
+
+networks:
+  network:
+    driver: overlay
+
+services:
+  node-exporter:
+    image: "prom/node-exporter"
+    deploy:
+      replicas: 1
+    user: root
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.sysfs=/host/sys'
+      - '--collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc)($$|/)'
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    networks:
+      - network
+
+  blackbox-exporter:
+    image: "prom/blackbox-exporter"
+    deploy:
+      replicas: 1
+    networks:
+      - network
+
+  postgres-exporter:
+    image: "wrouesnel/postgres_exporter"
+    deploy:
+      replicas: 1
+    environment:
+      - DATA_SOURCE_NAME=postgresql://user:password@postgres:5432/database?sslmode=disable
+    networks:
+      - network
+
+  mysql-exporter:
+    image: "prom/mysqld-exporter"
+    deploy:
+      replicas: 1
+    environment:
+      - DATA_SOURCE_NAME=root:password@(mysql:3306)/
+    networks:
+      - network
+
+  elasticsearch-exporter:
+    image: "justwatch/elasticsearch_exporter:1.0.2"
+    deploy:
+      replicas: 1
+    command:
+      - '-es.uri=http://elasticsearch:9200'
+    networks:
+      - network
+
+  redis-exporter:
+    image: "oliver006/redis_exporter"
+    deploy:
+      replicas: 1
+    networks:
+      - network

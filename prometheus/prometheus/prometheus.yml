@@ -12,11 +12,16 @@ alerting:
       - alertmanager:9093
 
 rule_files:
-  - "cpu.rules"
-  - "disk.rules"
-  - "ram.rules"
-  - "network.rules"
-  - "nginx.rules"
+  - "rules/system/cpu.rules"
+  - "rules/system/disk.rules"
+  - "rules/system/ram.rules"
+  - "rules/system/network.rules"
+  - "rules/services/nginx.rules"
+  - "rules/services/postgres.rules"
+  - "rules/services/mysql.rules"
+  - "rules/services/mongodb.rules"
+  - "rules/services/elasticsearch.rules"
+  - "rules/services/redis.rules"
 
 scrape_configs:
   - job_name: 'prometheus'
@@ -42,3 +47,19 @@ scrape_configs:
         target_label: instance
       - target_label: __address__
         replacement:  blackbox-exporter:9115
+
+  - job_name: 'postgres'
+    static_configs:
+      - targets: ['postgres-exporter:9187']
+
+  - job_name: 'mysql'
+    static_configs:
+      - targets: ['mysql-exporter:9104']
+
+  - job_name: 'elasticsearch'
+    static_configs:
+      - targets: ['elasticsearch-exporter:9114']
+
+  - job_name: 'redis'
+    static_configs:
+      - targets: ['redis-exporter:9121']

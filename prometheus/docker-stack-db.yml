@@ -1,0 +1,80 @@
+version: '3.7'
+
+networks:
+  network:
+    driver: overlay
+
+volumes:
+  postgres-data:
+  mysql-data:
+  mongodb-data:
+  elasticsearch-data:
+  redis-data:
+
+services:
+  postgres:
+    image: "postgres:11.4-alpine"
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+    environment:
+      - PGDATA=/postgresql/data
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=database
+    volumes:
+      - postgres-data:/postgresql/data
+    networks:
+      - network
+
+  mysql:
+    image: "mysql:8.0.16"
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - network
+
+  mongodb:
+    image: "mongo:4.1.13-bionic"
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: user
+      MONGO_INITDB_ROOT_PASSWORD: password
+    volumes:
+      - mongodb-data:/data/db
+    networks:
+      - network
+
+  elasticsearch:
+    image: "elasticsearch:7.2.0"
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+    environment:
+      - "ES_JAVA_OPTS=-Xms2g -Xmx2g"
+    networks:
+      - network
+
+  redis:
+    image: "redis:5.0.5"
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+    volumes:
+      - redis-data:/data
+    networks:
+      - network

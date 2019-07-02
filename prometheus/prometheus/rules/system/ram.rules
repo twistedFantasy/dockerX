@@ -7,5 +7,5 @@ groups:
       labels:
         severity: warning
       annotations:
-        description: 'Low RAM detected'
         summary: RAM Space Alert
+        description: 'Low RAM detected'

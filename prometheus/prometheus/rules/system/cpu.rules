@@ -7,7 +7,7 @@ groups:
       labels:
         severity: warning
       annotations:
+        summary: CPU Utilisation Alert
         description: 'High CPU utilisation detected for instance {{ $labels.instance_id
           }} tagged as: {{ $labels.instance_name_tag }}, the utilisation is currently:
           {{ $value }}%'
-        summary: CPU Utilisation Alert

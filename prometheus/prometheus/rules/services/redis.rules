@@ -1,0 +1,38 @@
+groups:
+- name: redis
+  rules:
+    - alert: redis_down
+      expr: redis_up == 0
+      for: 30m
+      labels:
+        severity: warning
+      annotations:
+        summary: "Redis down (instance {{ $labels.instance }})"
+        description: "Redis instance is down\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
+
+    - alert: missing_backup
+      expr: time() - redis_rdb_last_save_timestamp_seconds > 60 * 60 * 24
+      for: 30m
+      labels:
+        severity: warning
+      annotations:
+        summary: "Missing backup (instance {{ $labels.instance }})"
+        description: "Redis has not been backuped for 24 hours\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
+
+    - alert: out_of_memory
+      expr: redis_memory_used_bytes / redis_total_system_memory_bytes * 100 > 90
+      for: 30m
+      labels:
+        severity: warning
+      annotations:
+        summary: "Out of memory (instance {{ $labels.instance }})"
+        description: "Redis is running out of memory (> 90%)\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
+
+    - alert: too_many_connections
+      expr: redis_connected_clients > 100
+      for: 30m
+      labels:
+        severity: warning
+      annotations:
+        summary: "Too many connections (instance {{ $labels.instance }})"
+        description: "Redis instance has too many connections\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"

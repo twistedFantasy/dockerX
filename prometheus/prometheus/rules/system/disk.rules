@@ -7,5 +7,5 @@ groups:
       labels:
         severity: warning
       annotations:
-        description: 'Low disk space detected'
         summary: Disk Space Alert
+        description: 'Low disk space detected'
