@@ -1,4 +1,4 @@
-version: "3.6"
+version: '3.7'
 
 networks:
   network:
@@ -11,7 +11,7 @@ volumes:
 services:
 
   postgres:
-    image: postgres:9.6
+    image: "postgres:11.4-alpine"
     deploy:
       replicas: 1
       placement:

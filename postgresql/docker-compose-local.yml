@@ -1,4 +1,4 @@
-version: "3.6"
+version: '3.7'
 
 networks:
   network:
@@ -22,7 +22,7 @@ services:
     environment:
       - PGDATA=/postgresql/data
       - POSTGRES_USER=test_user
-      - POSTGRES_PASSWORD=ksadgoiwae3lfadsf
+      - POSTGRES_PASSWORD=example
       - POSTGRES_DB=test_database
     networks:
       - network
