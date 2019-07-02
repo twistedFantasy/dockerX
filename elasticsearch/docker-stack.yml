@@ -6,11 +6,10 @@ networks:
 
 volumes:
   elasticsearch-data:
-    driver: local
 
 services:
   elasticsearch:
-    image: elasticsearch:6.6.2
+    image: "elasticsearch:7.2.0"
     deploy:
       replicas: 1
       placement:

@@ -4,4 +4,4 @@ services:
 
   mongodb-express:
     ports:
-    - 8081:8081
+      - 8081:8081

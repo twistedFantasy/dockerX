@@ -6,7 +6,6 @@ networks:
 
 volumes:
   portainer-data:
-    driver: local
 
 services:
 

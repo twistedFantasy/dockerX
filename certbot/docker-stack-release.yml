@@ -6,9 +6,7 @@ networks:
 
 volumes:
   certbot-data:
-    driver: local
   webroot-data:
-    driver: local
 
 services:
   certbot:

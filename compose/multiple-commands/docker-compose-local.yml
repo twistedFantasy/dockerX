@@ -6,11 +6,8 @@ networks:
 
 volumes:
   postgres-data:
-    driver: local
   redis-data:
-    driver: local
   portainer-data:
-    driver: local
 
 services:
 
