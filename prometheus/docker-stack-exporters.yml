@@ -81,3 +81,5 @@ services:
       - RABBIT_URL=http://rabbitmq:15672
       - RABBIT_USER=rabbit
       - RABBIT_PASSWORD=password
+    networks:
+      - network
