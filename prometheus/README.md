@@ -25,8 +25,9 @@ docker swarm init --advertise-addr 192.168.56.101
 ```
 
 ```
-docker stack deploy -c docker-stack-monitoring.yml -c docker-stack-exporters.yml \
- -c docker-stack-db.yml -c docker-stack-common.yml dockerX-monitoring
+docker stack deploy --with-registry-auth -c docker-stack-monitoring.yml \
+ -c docker-stack-exporters.yml -c docker-stack-db.yml \
+ -c docker-stack-common.yml dockerX-monitoring
 ```
 
 List of stacks
@@ -89,3 +90,26 @@ vagrant destroy
 https://awesome-prometheus-alerts.grep.to/ --- very good resource with huge amount of configuration examples
 https://prometheus.io/docs/instrumenting/exporters/ --- custom official and non official exporters
 ```
+
+## Prometheus
+
+#### Exporters
+[Node Exporter](https://github.com/prometheus/node_exporter)<br/>
+[Postgres Exporter](https://github.com/wrouesnel/postgres_exporter)<br/>
+[ElasticSearch Exporter](https://github.com/justwatchcom/elasticsearch_exporter)<br/>
+[Redis Exporter](https://github.com/oliver006/redis_exporter)<br/>
+[RabbitMQ Exporter](https://github.com/kbudde/rabbitmq_exporter)<br/>
+
+## Grafana
+
+#### Basic information
+[Provisioning](https://grafana.com/docs/administration/provisioning/)<br/>
+[Prometheus Datasource](https://grafana.com/docs/features/datasources/prometheus/)<br/>
+
+#### Dashboards
+[Node Dashboard](https://grafana.com/dashboards/1860)<br/>
+[Postgres Dashboard](https://grafana.com/dashboards/3742)<br/>
+[ElasticSearch Dashboard](https://github.com/justwatchcom/elasticsearch_exporter/blob/master/examples/grafana/dashboard.json)<br/>
+[Redis Dashboard](https://grafana.com/dashboards/763)<br/>
+[RabbitMQ Dashboard](https://grafana.com/dashboards/10120)<br/>
+

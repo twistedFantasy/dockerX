@@ -20,5 +20,8 @@ services:
       replicas: 1
       placement:
         constraints: [node.role == manager]
+    environment:
+      RABBITMQ_DEFAULT_USER: rabbit
+      RABBITMQ_DEFAULT_PASS: password
     networks:
       - network

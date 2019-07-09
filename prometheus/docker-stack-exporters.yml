@@ -6,7 +6,7 @@ networks:
 
 services:
   node-exporter:
-    image: "prom/node-exporter"
+    image: "prom/node-exporter:v0.18.1"
     deploy:
       replicas: 1
     user: root
@@ -22,14 +22,14 @@ services:
       - network
 
   blackbox-exporter:
-    image: "prom/blackbox-exporter"
+    image: "prom/blackbox-exporter:v0.14.0"
     deploy:
       replicas: 1
     networks:
       - network
 
   postgres-exporter:
-    image: "wrouesnel/postgres_exporter"
+    image: "wrouesnel/postgres_exporter:v0.5.0"
     deploy:
       replicas: 1
     environment:
@@ -38,13 +38,22 @@ services:
       - network
 
   mysql-exporter:
-    image: "prom/mysqld-exporter"
+    image: "prom/mysqld-exporter:v0.11.0"
     deploy:
       replicas: 1
     environment:
       - DATA_SOURCE_NAME=root:password@(mysql:3306)/
     networks:
       - network
+
+#  mongodb-exporter:
+#    image: "mongodb_exporter"
+#    deploy:
+#      replicas: 1
+#    environment:
+#      - MONGODB_URL="mongodb://user:password@mongodb:27017/database",
+#    networks:
+#      - network
 
   elasticsearch-exporter:
     image: "justwatch/elasticsearch_exporter:1.0.2"
@@ -56,8 +65,19 @@ services:
       - network
 
   redis-exporter:
-    image: "oliver006/redis_exporter"
+    image: "oliver006/redis_exporter:v1.0.3-alpine"
     deploy:
       replicas: 1
+    environment:
+      - REDIS_ADDR=redis://redis:6379
     networks:
       - network
+
+  rabbitmq-exporter:
+    image: "kbudde/rabbitmq-exporter:v1.0.0-RC6.1"
+    deploy:
+      replicas: 1
+    environment:
+      - RABBIT_URL=http://rabbitmq:15672
+      - RABBIT_USER=rabbit
+      - RABBIT_PASSWORD=password
