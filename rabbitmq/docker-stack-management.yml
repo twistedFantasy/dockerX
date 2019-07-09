@@ -1,0 +1,20 @@
+version: '3.7'
+
+networks:
+  network:
+    driver: overlay
+
+services:
+    rabbitmq:
+      image: "rabbitmq:3.7.16-management-alpine"
+      deploy:
+        replicas: 1
+        placement:
+          constraints: [node.role == manager]
+      environment:
+        RABBITMQ_DEFAULT_USER: rabbit
+        RABBITMQ_DEFAULT_PASS: password
+      ports:
+        - "15672:15672"
+      networks:
+        - network
