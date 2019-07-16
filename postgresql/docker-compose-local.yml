@@ -10,9 +10,7 @@ volumes:
 services:
 
   postgres:
-    build:
-      context: ../
-      dockerfile: dockerX/postgresql/Dockerfile
+    image: "postgres:11.4-alpine"
     container_name: postgres
     ports:
       - 5432:5432
