@@ -3,9 +3,9 @@ groups:
   rules:
     - alert: postgres_down
       expr: pg_up == 0
-      for: 30m
+      for: 1m
       labels:
-        severity: warning
+        severity: critical
       annotations:
         summary: "PostgreSQL down (instance {{ $labels.instance }})"
-        description: "PostgreSQL instance is down\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
+        description: "PostgreSQL down for 1m\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"

@@ -16,6 +16,7 @@ rule_files:
   - "rules/system/disk.rules"
   - "rules/system/ram.rules"
   - "rules/system/network.rules"
+  - "rules/services/ssl.rules"
   - "rules/services/nginx.rules"
   - "rules/services/postgres.rules"
   - "rules/services/mysql.rules"
@@ -28,6 +29,11 @@ scrape_configs:
     scrape_interval: 30s
     static_configs:
       - targets: ['prometheus:9090']
+
+  - job_name: 'cadvisor'
+    scrape_interval: 10s
+    static_configs:
+      - targets: ['cadvisor-exporter:9080']
 
   - job_name: 'node'
     scrape_interval: 30s
@@ -58,7 +64,7 @@ scrape_configs:
 
   - job_name: 'elasticsearch'
     static_configs:
-      - targets: ['elasticsearch-exporter:9114']
+      - targets: ['elasticsearch-exporter:9108']
 
   - job_name: 'redis'
     static_configs:

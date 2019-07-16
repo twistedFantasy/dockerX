@@ -1,37 +1,17 @@
 route:
   repeat_interval: 2h
-  receiver: mail-receiver
+  receiver: warning
   routes:
     - match:
-        alertname: nginx_down
-      receiver: mail-receiver
+        severity: warning
+      receiver: warning
 
     - match:
-        alertname: postgres_down
-        receiver: critical-mail-receiver
-
-    - match:
-        alertname: high_host_cpu_utilisation
-      receiver: critical-mail-receiver
-
-    - match:
-        alertname: low_disk_space
-      receiver: critical-mail-receiver
-    - match:
-        alertname: low_ram_space
-      receiver: critical-mail-receiver
-
-    - match:
-        alertname: unusual_network_throughput_in
-      receiver: critical-mail-receiver
-
-    - match:
-        alertname: unusual_network_throughput_out
-      receiver: critical-mail-receiver
-
+        severity: critical
+      receiver: critical
 
 receivers:
-- name: 'mail-receiver'
+- name: 'warning'
   email_configs:
   - to: <to-email>
     from: <from-email>
@@ -40,7 +20,7 @@ receivers:
     auth_identity: "<user-name>"
     auth_password: "<user-app-specific-password>"
 
-- name: 'critical-mail-receiver'
+- name: 'critical'
   email_configs:
     - to: <to-email>
       from: <from-email>

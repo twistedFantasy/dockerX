@@ -5,10 +5,29 @@ networks:
     driver: overlay
 
 services:
+  cadvisor-exporter:
+    image: "google/cadvisor:v0.33.0"
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+    command: -port=9080
+    ports:
+      - "9080:9080"
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    networks:
+      - network
+
   node-exporter:
     image: "prom/node-exporter:v0.18.1"
     deploy:
       replicas: 1
+      placement:
+        constraints: [node.role == manager]
     user: root
     command:
       - '--path.procfs=/host/proc'
@@ -25,6 +44,8 @@ services:
     image: "prom/blackbox-exporter:v0.14.0"
     deploy:
       replicas: 1
+      placement:
+        constraints: [node.role == manager]
     networks:
       - network
 
@@ -41,6 +62,8 @@ services:
     image: "prom/mysqld-exporter:v0.11.0"
     deploy:
       replicas: 1
+      placement:
+        constraints: [node.role == manager]
     environment:
       - DATA_SOURCE_NAME=root:password@(mysql:3306)/
     networks:
@@ -59,8 +82,11 @@ services:
     image: "justwatch/elasticsearch_exporter:1.0.2"
     deploy:
       replicas: 1
-    command:
-      - '-es.uri=http://elasticsearch:9200'
+      placement:
+        constraints: [node.role == manager]
+    command: '-es.uri=http://elasticsearch:9200'
+    ports:
+      - 9108:9108
     networks:
       - network
 
@@ -68,6 +94,8 @@ services:
     image: "oliver006/redis_exporter:v1.0.3-alpine"
     deploy:
       replicas: 1
+      placement:
+        constraints: [node.role == manager]
     environment:
       - REDIS_ADDR=redis://redis:6379
     networks:
@@ -77,6 +105,8 @@ services:
     image: "kbudde/rabbitmq-exporter:v1.0.0-RC6.1"
     deploy:
       replicas: 1
+      placement:
+        constraints: [node.role == manager]
     environment:
       - RABBIT_URL=http://rabbitmq:15672
       - RABBIT_USER=rabbit

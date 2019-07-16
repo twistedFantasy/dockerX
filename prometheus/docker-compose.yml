@@ -1,0 +1,20 @@
+version: '3.7'
+
+networks:
+  network:
+
+services:
+  prometheus:
+    build:
+      dockerfile: prometheus/Dockerfile
+      context: ./
+
+  alertmanager:
+    build:
+      dockerfile: ./alertmanager/Dockerfile
+      context: ./
+
+  grafana:
+    build:
+      dockerfile: ./grafana/Dockerfile
+      context: ./

@@ -5,10 +5,19 @@ groups:
       expr: (elasticsearch_jvm_memory_used_bytes{area="heap"} / elasticsearch_jvm_memory_max_bytes{area="heap"}) * 100 > 90
       for: 30m
       labels:
-        severity: warning
+        severity: critical
       annotations:
         summary: "Elastic Heap Usage Too High (instance {{ $labels.instance }})"
         description: "The heap usage is over 90% for 5m\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
+
+    - alert: elastic_cluster_red
+      expr: elasticsearch_cluster_health_status{color="red"} == 1
+      for: 1m
+      labels:
+        severity: critical
+      annotations:
+        summary: "Elastic Cluster Red (instance {{ $labels.instance }})"
+        description: "Elastic Cluster Red status\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
 
     - alert: elastic_heap_usage_warning
       expr: (elasticsearch_jvm_memory_used_bytes{area="heap"} / elasticsearch_jvm_memory_max_bytes{area="heap"}) * 100 > 80
@@ -18,15 +27,6 @@ groups:
       annotations:
         summary: "Elastic Heap Usage warning (instance {{ $labels.instance }})"
         description: "The heap usage is over 80% for 5m\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
-
-    - alert: elastic_cluster_red
-      expr: elasticsearch_cluster_health_status{color="red"} == 1
-      for: 30m
-      labels:
-        severity: warning
-      annotations:
-        summary: "Elastic Cluster Red (instance {{ $labels.instance }})"
-        description: "Elastic Cluster Red status\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
 
     - alert: elastic_cluster_yellow
       expr: elasticsearch_cluster_health_status{color="yellow"} == 1

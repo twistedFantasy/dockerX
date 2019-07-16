@@ -3,9 +3,9 @@ groups:
   rules:
     - alert: low_ram_space
       expr: (sum(node_memory_MemTotal_bytes) - sum(node_memory_MemFree_bytes + node_memory_Buffers_bytes + node_memory_Cached_bytes) ) / sum(node_memory_MemTotal_bytes) * 100 > 80
-      for: 20m
+      for: 30m
       labels:
-        severity: warning
+        severity: critical
       annotations:
         summary: RAM Space Alert
-        description: 'Low RAM detected'
+        description: 'Low RAM detected for 30m\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}'

@@ -13,6 +13,8 @@ services:
     image: "dockerx-prometheus"
     deploy:
       replicas: 1
+      placement:
+        constraints: [node.role == manager]
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
@@ -31,6 +33,8 @@ services:
     image: "dockerx-alertmanager"
     deploy:
       replicas: 1
+      placement:
+        constraints: [node.role == manager]
     command:
       - '--config.file=/etc/alertmanager/config.yml'
       - '--storage.path=/alertmanager'
@@ -42,6 +46,8 @@ services:
    image: "dockerx-grafana"
    deploy:
      replicas: 1
+     placement:
+       constraints: [node.role == manager]
    environment:
     - GF_SECURITY_ADMIN_USER=${ADMIN_USER:-admin}
     - GF_SECURITY_ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}

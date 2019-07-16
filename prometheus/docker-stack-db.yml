@@ -63,7 +63,15 @@ services:
         constraints: [node.role == manager]
     volumes:
       - elasticsearch-data:/usr/share/elasticsearch/data
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
     environment:
+      - node.name=elasticsearch01
+      - cluster.initial_master_nodes=elasticsearch01
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms2g -Xmx2g"
     networks:
       - network

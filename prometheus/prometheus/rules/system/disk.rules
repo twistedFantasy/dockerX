@@ -3,9 +3,9 @@ groups:
   rules:
     - alert: low_disk_space
       expr: node_filesystem_free_bytes{mountpoint ="/"} / node_filesystem_size_bytes{mountpoint ="/"} * 100 < 20
-      for: 20m
+      for: 30m
       labels:
-        severity: warning
+        severity: critical
       annotations:
         summary: Disk Space Alert
-        description: 'Low disk space detected'
+        description: 'Low Disk Space detected for 30m\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}'

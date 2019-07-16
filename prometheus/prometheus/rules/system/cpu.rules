@@ -3,11 +3,9 @@ groups:
   rules:
     - alert: high_host_cpu_utilisation
       expr: 100 - (avg by(instance) (irate(node_cpu{mode="idle"}[5m])) * 100) > 80
-      for: 20m
+      for: 30m
       labels:
-        severity: warning
+        severity: critical
       annotations:
         summary: CPU Utilisation Alert
-        description: 'High CPU utilisation detected for instance {{ $labels.instance_id
-          }} tagged as: {{ $labels.instance_name_tag }}, the utilisation is currently:
-          {{ $value }}%'
+        description: 'High CPU utilisation detected for 30m\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}'

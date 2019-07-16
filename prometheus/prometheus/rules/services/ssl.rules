@@ -1,0 +1,20 @@
+groups:
+- name: ssl
+  rules:
+    - alert: ssl_certificate_will_expire_soon
+      expr: probe_ssl_earliest_cert_expiry - time() < 86400 * 30
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: "SSL certificate will expire soon (instance {{ $labels.instance }})"
+        description: "SSL certificate expires in 30 days\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
+
+    - alert: ssl_certificate_has_expired
+      expr: probe_ssl_earliest_cert_expiry - time()  <= 0
+      for: 5m
+      labels:
+        severity: critical
+      annotations:
+        summary: "SSL certificate has expired (instance {{ $labels.instance }})"
+        description: "SSL certificate has expired already\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"

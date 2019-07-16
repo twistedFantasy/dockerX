@@ -12,6 +12,14 @@ Increase vm.max_map_count value for elasticsearch
 sudo sysctl -w vm.max_map_count=262144
 ```
 
+### Docker-Compose
+```
+docker-compose -f docker-stack-monitoring.yml \
+ -f docker-stack-exporters.yml -f docker-stack-db.yml \
+ -f docker-stack-common.yml -f docker-compose.yml up -d
+```
+
+### Docker Swarm
 Build docker images
 ``` 
 docker build -f prometheus/Dockerfile -t "dockerx-prometheus" .
@@ -85,6 +93,11 @@ vagrant halt
 vagrant destroy
 ```
 
+# Issues
+Grafana provision mechanism doesn't work very stable. For example, we added 2 dashboards and deployed them. Then 
+we want to update 1 of already existing dashboards or add a new one, in this case grafana will not make automatic provision
+during next grafana container start. To force this you need to delete this grafana service/container and volume.
+
 # Useful resources
 ``` 
 https://awesome-prometheus-alerts.grep.to/ --- very good resource with huge amount of configuration examples
@@ -94,6 +107,7 @@ https://prometheus.io/docs/instrumenting/exporters/ --- custom official and non 
 ## Prometheus
 
 #### Exporters
+[CAdvisor Exporter](https://github.com/google/cadvisor)<br/>
 [Node Exporter](https://github.com/prometheus/node_exporter)<br/>
 [Postgres Exporter](https://github.com/wrouesnel/postgres_exporter)<br/>
 [ElasticSearch Exporter](https://github.com/justwatchcom/elasticsearch_exporter)<br/>
@@ -107,9 +121,9 @@ https://prometheus.io/docs/instrumenting/exporters/ --- custom official and non 
 [Prometheus Datasource](https://grafana.com/docs/features/datasources/prometheus/)<br/>
 
 #### Dashboards
+[CAdvisor Dashboard](https://grafana.com/grafana/dashboards/8321)<br/>
 [Node Dashboard](https://grafana.com/dashboards/1860)<br/>
 [Postgres Dashboard](https://grafana.com/dashboards/3742)<br/>
 [ElasticSearch Dashboard](https://github.com/justwatchcom/elasticsearch_exporter/blob/master/examples/grafana/dashboard.json)<br/>
 [Redis Dashboard](https://grafana.com/dashboards/763)<br/>
-[RabbitMQ Dashboard](https://grafana.com/dashboards/10120)<br/>
-
+[RabbitMQ Dashboard](https://grafana.com/dashboards/4279)<br/>
