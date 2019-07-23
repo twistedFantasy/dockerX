@@ -7,7 +7,7 @@ groups:
       labels:
         severity: critical
       annotations:
-        summary: "Nginx down (instance {{ $labels.instance }})"  # FIXME: '{{ $labels.host }}' '{{ $labels.name }}'
+        summary: "Nginx down (instance {{ $labels.instance }})"
         description: "Nginx down for 1m\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
 
     - alert: nginx_http_errors_4xx
