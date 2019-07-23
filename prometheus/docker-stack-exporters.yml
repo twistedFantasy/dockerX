@@ -5,8 +5,9 @@ networks:
     driver: overlay
 
 services:
+
   cadvisor-exporter:
-    image: "google/cadvisor:v0.33.0"
+    image: "google/cadvisor:latest"
     deploy:
       replicas: 1
       placement:
@@ -46,6 +47,18 @@ services:
       replicas: 1
       placement:
         constraints: [node.role == manager]
+    networks:
+      - network
+
+  nginx-exporter:
+    image: "nginx/nginx-prometheus-exporter:0.4.1"
+    command: -nginx.scrape-uri http://nginx:80/stub_status
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+    ports:
+      - "9113:9113"
     networks:
       - network
 

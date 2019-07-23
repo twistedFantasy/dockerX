@@ -8,6 +8,8 @@ services:
     build:
       dockerfile: prometheus/Dockerfile
       context: ./
+      args:
+        BRANCH: "develop"
 
   alertmanager:
     build:
@@ -18,3 +20,10 @@ services:
     build:
       dockerfile: ./grafana/Dockerfile
       context: ./
+
+  nginx:
+    build:
+      dockerfile: ./nginx/Dockerfile
+      context: ./
+    ports:
+      - "80:80"

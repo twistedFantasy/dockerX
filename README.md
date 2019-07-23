@@ -16,7 +16,6 @@ https://github.com/docker/compose/releases
 ``` 
 https://www.virtualbox.org/wiki/Downloads
 https://www.vagrantup.com/docs/installation/
-
 ```
 
 # Sandbox

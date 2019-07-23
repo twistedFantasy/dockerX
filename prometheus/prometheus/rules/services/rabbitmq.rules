@@ -1,0 +1,75 @@
+groups:
+- name: rabbitmq
+  rules:
+    - alert: rabbitmq_down
+      expr: rabbitmq_up == 0
+      for: 5m
+      labels:
+        severity: critical
+      annotations:
+        summary: "Rabbitmq down (instance {{ $labels.instance }})"
+        description: "RabbitMQ node down\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
+
+    - alert: rabbitmq_out_of_memory
+      expr: rabbitmq_node_mem_used / rabbitmq_node_mem_limit * 100 > 90
+      for: 5m
+      labels:
+        severity: critical
+      annotations:
+        summary: "Out of memory (instance {{ $labels.instance }})"
+        description: "Memory available for RabbmitMQ is low (< 10%)\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
+
+    - alert: rabbitmq_too_many_connections
+      expr: rabbitmq_connectionsTotal > 1000
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: "Too many connections (instance {{ $labels.instance }})"
+        description: "RabbitMQ instance has too many connections (> 1000)\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
+
+    - alert: rabbitmq_dead_letter_queue_filling_up
+      expr: rabbitmq_queue_messages{queue="my-dead-letter-queue"} > 10
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: "Dead letter queue filling up (instance {{ $labels.instance }})"
+        description: "Dead letter queue is filling up (> 10 msgs)\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
+
+    - alert: rabbitmq_too_many_messages_in_queue
+      expr: rabbitmq_queue_messages_ready{queue="my-queue"} > 1000
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: "Too many messages in queue (instance {{ $labels.instance }})"
+        description: "Queue is filling up (> 1000 msgs)\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
+
+    - alert: rabbitmq_slow_queue_consuming
+      expr: time() - rabbitmq_queue_head_message_timestamp{queue="my-queue"} > 60
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: "Slow queue consuming (instance {{ $labels.instance }})"
+        description: "Queue messages are consumed slowly (> 60s)\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
+
+    - alert: rabbitmq_no_consumer
+      expr: rabbitmq_queue_consumers == 0
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: "No consumer (instance {{ $labels.instance }})"
+        description: "Queue has no consumer\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
+
+    - alert: rabbitmq_too_many_consumers
+      expr: rabbitmq_queue_consumers > 1
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: "Too many consumers (instance {{ $labels.instance }})"
+        description: "Queue should have only 1 consumer\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
+

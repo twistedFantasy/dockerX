@@ -4,6 +4,7 @@ global:
 
   external_labels:
       monitor: 'prometheus-grafana-exporter'
+      branch: 'BRANCH'
 
 alerting:
   alertmanagers:
@@ -16,6 +17,7 @@ rule_files:
   - "rules/system/disk.rules"
   - "rules/system/ram.rules"
   - "rules/system/network.rules"
+  - "rules/system/docker.rules"
   - "rules/services/ssl.rules"
   - "rules/services/nginx.rules"
   - "rules/services/postgres.rules"
@@ -23,6 +25,7 @@ rule_files:
   - "rules/services/mongodb.rules"
   - "rules/services/elasticsearch.rules"
   - "rules/services/redis.rules"
+  - "rules/services/rabbitmq.rules"
 
 scrape_configs:
   - job_name: 'prometheus'
@@ -54,6 +57,10 @@ scrape_configs:
       - target_label: __address__
         replacement:  blackbox-exporter:9115
 
+  - job_name: 'nginx-stub-status'
+    static_configs:
+      - targets: ['nginx-exporter:9113']
+
   - job_name: 'postgres'
     static_configs:
       - targets: ['postgres-exporter:9187']
@@ -73,3 +80,13 @@ scrape_configs:
   - job_name: 'rabbitmq'
     static_configs:
       - targets: ['rabbitmq-exporter:9419']
+
+#  - job_name: 'spring-boot'
+#    scrape_interval: 60s
+#    metrics_path: '/actuator/prometheus'
+#    static_configs:
+#      - targets: ['backend:8080']
+#    metric_relabel_configs:
+#      - source_labels: [__name__]
+#        target_label: __name__
+#        replacement: "backend_${1}"

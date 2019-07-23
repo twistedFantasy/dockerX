@@ -2,11 +2,38 @@ groups:
 - name: nginx
   rules:
     - alert: nginx_down
-      expr: probe_success{instance="nginx:80",job="nginx"} == 0
+      expr: probe_success{instance="nginx:80/stub_status",job="nginx"} == 0
       for: 1m
       labels:
         severity: critical
       annotations:
-        summary: "Nginx down (instance {{ $labels.instance }})"
+        summary: "Nginx down (instance {{ $labels.instance }})"  # FIXME: '{{ $labels.host }}' '{{ $labels.name }}'
         description: "Nginx down for 1m\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
 
+    - alert: nginx_http_errors_4xx
+      expr: sum(rate(nginx_http_requests_total{status=~"^4.."}[1m])) / sum(rate(nginx_http_requests_total[1m])) * 100 > 5
+      for: 5m
+      labels:
+        severity: critical
+      annotations:
+        summary: "HTTP errors 4xx (instance {{ $labels.instance }})"
+        description: "Too many HTTP requests with status 4xx (> 5%)\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
+
+    - alert: nginx_http_errors_5xx
+      expr: sum(rate(nginx_http_requests_total{status=~"^5.."}[1m])) / sum(rate(nginx_http_requests_total[1m])) * 100 > 5
+      for: 5m
+      labels:
+        severity: critical
+      annotations:
+        summary: "HTTP errors 5xx (instance {{ $labels.instance }})"
+        description: "Too many HTTP requests with status 5xx (> 5%)\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
+
+
+    - alert: nginx_blackbox_slow_requests
+      expr: probe_http_duration_seconds > 2
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: "Blackbox slow requests (instance {{ $labels.instance }})"
+        description: "Blackbox request took more than 2s\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"

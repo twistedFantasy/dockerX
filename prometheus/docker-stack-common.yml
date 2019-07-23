@@ -6,7 +6,7 @@ networks:
 
 services:
   nginx:
-    image: "nginx:1.17.0-alpine"
+    image: "dockerx-nginx"
     deploy:
       replicas: 1
     ports:

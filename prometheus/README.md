@@ -22,9 +22,11 @@ docker-compose -f docker-stack-monitoring.yml \
 ### Docker Swarm
 Build docker images
 ``` 
-docker build -f prometheus/Dockerfile -t "dockerx-prometheus" .
+docker build --build-arg BRANCH="develop" -f prometheus/Dockerfile -t "dockerx-prometheus" .
 docker build -f alertmanager/Dockerfile -t "dockerx-alertmanager" .
 docker build -f grafana/Dockerfile -t "dockerx-grafana" .
+
+docker build -f nginx/Dockerfile -t "dockerx-nginx" .
 ```
 
 Activate docker swarm
@@ -109,10 +111,12 @@ https://prometheus.io/docs/instrumenting/exporters/ --- custom official and non 
 #### Exporters
 [CAdvisor Exporter](https://github.com/google/cadvisor)<br/>
 [Node Exporter](https://github.com/prometheus/node_exporter)<br/>
+[Nginx Exporter](https://github.com/nginxinc/nginx-prometheus-exporter)<br/>
 [Postgres Exporter](https://github.com/wrouesnel/postgres_exporter)<br/>
 [ElasticSearch Exporter](https://github.com/justwatchcom/elasticsearch_exporter)<br/>
 [Redis Exporter](https://github.com/oliver006/redis_exporter)<br/>
 [RabbitMQ Exporter](https://github.com/kbudde/rabbitmq_exporter)<br/>
+[JVM Micrometer Exporter](https://dzone.com/articles/monitoring-using-spring-boot-2-prometheus-and-graf)<br/>
 
 ## Grafana
 
@@ -127,3 +131,4 @@ https://prometheus.io/docs/instrumenting/exporters/ --- custom official and non 
 [ElasticSearch Dashboard](https://github.com/justwatchcom/elasticsearch_exporter/blob/master/examples/grafana/dashboard.json)<br/>
 [Redis Dashboard](https://grafana.com/dashboards/763)<br/>
 [RabbitMQ Dashboard](https://grafana.com/dashboards/4279)<br/>
+[JVM Micrometer Dashboard](https://grafana.com/grafana/dashboards/4701/revisions)<br/>

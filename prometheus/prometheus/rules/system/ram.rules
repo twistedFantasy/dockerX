@@ -9,3 +9,23 @@ groups:
       annotations:
         summary: RAM Space Alert
         description: 'Low RAM detected for 30m\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}'
+
+
+    - alert: swap_is_filling_up
+      expr: (((node_memory_SwapTotal - node_memory_SwapFree) / node_memory_SwapTotal) * 100) > 80
+      for: 5m
+      labels:
+        severity: critical
+      annotations:
+        summary: "Swap is filling up (instance {{ $labels.instance }})"
+        description: "Swap is filling up (>80%)\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
+
+
+    - alert: context_switching
+      expr: rate(node_context_switches_total[5m]) > 1000
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: "Context switching (instance {{ $labels.instance }})"
+        description: "Context switching is growing on node (> 1000 / s)\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
