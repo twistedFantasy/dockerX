@@ -10,7 +10,7 @@ volumes:
 services:
 
   portainer:
-    image: portainer/portainer
+    image: portainer/portainer:1.21.0
     ports:
       - 9009:9000
     volumes:
