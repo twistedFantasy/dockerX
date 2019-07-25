@@ -1,3 +1,11 @@
-docker stack deploy --with-registry-auth -c=mongodb/docker-stack-base.yml -c=mongodb/docker-stack-develop.yml $CI_PROJECT_NAMESPACE-$SERVICE_NAME
+Local development
+```
+docker-compose -f docker-compose.yml up -d
+```
 
-docker-compose -f docker-compose-local.yml up -d
+Docker Swarm
+```
+docker stack deploy --with-registry-auth -c=docker-stack-base.yml -c=docker-stack-develop.yml twistedfantasy-mongodb
+```
+
+[MongoDB docker image on docker hub](https://hub.docker.com/_/mongo)

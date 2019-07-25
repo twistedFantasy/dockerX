@@ -5,22 +5,17 @@ networks:
     driver: overlay
 
 volumes:
-  mariadb-data:
+  mysql-data:
 
 services:
-  mariadb:
-    image: "mariadb:10.4.6-bionic"
-    deploy:
-      replicas: 1
-      placement:
-        constraints: [node.role == manager]
+  mysql:
+    image: "mysql:8.0.17"
     environment:
       - MYSQL_ROOT_PASSWORD=password
       - MYSQL_DATABASE=test_database
       - MYSQL_USER=test_user
       - MYSQL_PASSWORD=test_password
     volumes:
-      - mariadb-data:/var/lib/mysql
+      - mysql-data:/var/lib/mysql
     networks:
       - network
-

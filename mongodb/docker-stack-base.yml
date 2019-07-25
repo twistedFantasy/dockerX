@@ -8,7 +8,6 @@ volumes:
   mongodb-data:
 
 services:
-
   mongodb:
     image: "mongo:4.1.13-bionic"
     deploy:
@@ -16,8 +15,8 @@ services:
       placement:
         constraints: [node.role == manager]
     environment:
-      MONGO_INITDB_ROOT_USERNAME: user
-      MONGO_INITDB_ROOT_PASSWORD: g9sJBHiq79L4n9O3
+      MONGO_INITDB_ROOT_USERNAME: test_user
+      MONGO_INITDB_ROOT_PASSWORD: test_password
     volumes:
       - mongodb-data:/data/db
     networks:
@@ -30,11 +29,12 @@ services:
       placement:
         constraints: [node.role == manager]
     environment:
-      ME_CONFIG_BASICAUTH_USERNAME: root
-      ME_CONFIG_BASICAUTH_PASSWORD: LPBZsPKM1iTE
+      ME_CONFIG_MONGODB_ENABLE_ADMIN: "true"
+      ME_CONFIG_BASICAUTH_USERNAME: admin
+      ME_CONFIG_BASICAUTH_PASSWORD: test_password
       ME_CONFIG_MONGODB_SERVER: mongodb
       ME_CONFIG_MONGODB_PORT: 27017
-      ME_CONFIG_MONGODB_ADMINUSERNAME: user
-      ME_CONFIG_MONGODB_ADMINPASSWORD: g9sJBHiq79L4n9O3
+      ME_CONFIG_MONGODB_ADMINUSERNAME: test_user
+      ME_CONFIG_MONGODB_ADMINPASSWORD: test_password
     networks:
       - network

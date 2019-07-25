@@ -2,7 +2,7 @@ version: '3.7'
 
 networks:
   network:
-    driver: overlay
+    driver: bridge
 
 volumes:
   mariadb-data:
@@ -10,17 +10,14 @@ volumes:
 services:
   mariadb:
     image: "mariadb:10.4.6-bionic"
-    deploy:
-      replicas: 1
-      placement:
-        constraints: [node.role == manager]
+    volumes:
+      - mariadb-data:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=password
       - MYSQL_DATABASE=test_database
       - MYSQL_USER=test_user
       - MYSQL_PASSWORD=test_password
-    volumes:
-      - mariadb-data:/var/lib/mysql
+    ports:
+      - 3336:3306
     networks:
       - network
-

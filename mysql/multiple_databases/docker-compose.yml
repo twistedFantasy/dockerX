@@ -1,0 +1,18 @@
+version: '3.7'
+
+networks:
+  network:
+    driver: overlay
+
+volumes:
+  mysql-data:
+
+services:
+  mysql:
+    build:
+      context: ../
+      dockerfile: Dockerfile
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - network

@@ -8,18 +8,17 @@ volumes:
   mariadb-data:
 
 services:
-
   mariadb:
     build:
       context: ../
-      dockerfile: dockerX/mariadb/Dockerfile
+      dockerfile: Dockerfile
     volumes:
       - mariadb-data:/var/lib/mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=Yi6vLzVYgoqIg89R
-      - MYSQL_DATABASE=fomular_assistent_database
-      - MYSQL_USER=fomular_assistent_user
-      - MYSQL_PASSWORD=v9Lvu3qpnFoagie7
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=test_database
+      - MYSQL_USER=test_user
+      - MYSQL_PASSWORD=test_password
     ports:
       - 3336:3306
     networks:

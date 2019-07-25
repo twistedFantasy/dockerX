@@ -7,10 +7,6 @@ networks:
 services:
     rabbitmq:
       image: "rabbitmq:3.7.17-management-alpine"
-      deploy:
-        replicas: 1
-        placement:
-          constraints: [node.role == manager]
       environment:
         RABBITMQ_DEFAULT_USER: rabbit
         RABBITMQ_DEFAULT_PASS: password

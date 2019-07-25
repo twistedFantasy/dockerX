@@ -9,13 +9,16 @@ volumes:
 
 services:
   mysql:
-    image: "mysql:8.0.16"
+    image: "mysql:8.0.17"
     deploy:
       replicas: 1
       placement:
         constraints: [node.role == manager]
     environment:
-      - MYSQL_ROOT_PASSWORD=example
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=test_database
+      - MYSQL_USER=test_user
+      - MYSQL_PASSWORD=test_password
     volumes:
       - mysql-data:/var/lib/mysql
     networks:

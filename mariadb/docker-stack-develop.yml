@@ -1,12 +1,11 @@
 version: '3.7'
 
 services:
-
   mariadb:
     environment:
-      - MYSQL_ROOT_PASSWORD=Yi6vLzVYgoqIg89R
-      - MYSQL_DATABASE=fomular_assistent_database
-      - MYSQL_USER=fomular_assistent_user
-      - MYSQL_PASSWORD=v9Lvu3qpnFoagie7
+      - MYSQL_ROOT_PASSWORD=develop_password
+      - MYSQL_DATABASE=develop_test_database
+      - MYSQL_USER=develop_test_user
+      - MYSQL_PASSWORD=develop_test_password
     ports:
       - 3336:3306

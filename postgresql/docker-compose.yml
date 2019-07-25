@@ -1,0 +1,23 @@
+version: '3.7'
+
+networks:
+  network:
+    driver: bridge
+
+volumes:
+  postgres-data:
+
+services:
+  postgres:
+    image: "postgres:11.4-alpine"
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres-data:/postgresql/data
+    environment:
+      - PGDATA=/postgresql/data
+      - POSTGRES_USER=test_user
+      - POSTGRES_PASSWORD=example
+      - POSTGRES_DB=test_database
+    networks:
+      - network
