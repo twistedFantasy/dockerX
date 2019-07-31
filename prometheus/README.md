@@ -25,6 +25,25 @@ docker-compose -f docker-stack-monitoring.yml \
  -f docker-stack-common.yml -f docker-compose.yml up -d
 ```
 
+Open Grafana in browser
+```
+http://192.168.56.101:3000/
+```
+
+Open Prometheus in browser
+``` 
+http://192.168.56.101:9090/
+```
+
+Stop all docker-compose services
+```
+docker-compose -f docker-compose.yml stop
+```
+Delete all docker-compose services and volume
+```
+docker-compose -f docker-compose.yml down -v
+```
+
 ### Docker Swarm
 Build docker images
 ``` 

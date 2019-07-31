@@ -1,0 +1,67 @@
+version: '3.7'
+
+networks:
+  network:
+    driver: bridge
+
+volumes:
+  elasticsearch-data:
+
+services:
+  filebeat:
+    build:
+      dockerfile: ./filebeat/Dockerfile
+      context: ./
+      args:
+        IMAGE: "docker.elastic.co/beats/filebeat:7.2.0"
+    environment:
+      - "ES_JAVA_OPTS=-Xms256m -Xmx256m"
+    volumes:
+      - "/var/lib/docker/containers:/usr/share/dockerlogs/data:ro"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    networks:
+      - network
+
+  logstash:
+    build:
+      dockerfile: ./logstash/Dockerfile
+      context: ./
+      args:
+        IMAGE: "docker.elastic.co/logstash/logstash:7.2.0"
+    environment:
+      - "ES_JAVA_OPTS=-Xms256m -Xmx256m"
+    networks:
+      - network
+
+  elasticsearch:
+    build:
+      dockerfile: ./elasticsearch/Dockerfile
+      context: ./
+      args:
+        IMAGE: "docker.elastic.co/elasticsearch/elasticsearch:7.2.0"
+    environment:
+      - "ES_JAVA_OPTS=-Xms2g -Xmx2g"
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+    networks:
+      - network
+
+  kibana:
+    build:
+      dockerfile: ./kibana/Dockerfile
+      context: ./
+      args:
+        IMAGE: "docker.elastic.co/kibana/kibana:7.2.0"
+    environment:
+      - "LOGGING_QUIET=true"
+    ports:
+      - "5601:5601"
+    networks:
+      - network
+
+  nginx:
+    image: "nginx:1.17.2-alpine"
+    ports:
+      - "80:80"
+    networks:
+      - network

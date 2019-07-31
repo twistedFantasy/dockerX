@@ -79,3 +79,12 @@ services:
       - "5601:5601"
     networks:
       - network
+
+  nginx:
+    image: "nginx:1.17.2-alpine"
+    deploy:
+      replicas: 1
+    ports:
+      - "80:80"
+    networks:
+      - network
