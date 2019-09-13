@@ -1,0 +1,26 @@
+version: "3.7"
+
+networks:
+  network:
+    driver: overlay
+
+volumes:
+  pgadmin-data:
+
+
+services:
+  pgadmin:
+    image: dpage/pgadmin4:4.12
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+    environment:
+      PGADMIN_DEFAULT_EMAIL: system@test.com
+      PGADMIN_DEFAULT_PASSWORD: I0Kk2JPNFumZExPu
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    ports:
+      - 80:80
+    networks:
+      - network
