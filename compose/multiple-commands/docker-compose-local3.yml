@@ -1,0 +1,34 @@
+version: '3.7'
+
+networks:
+  network:
+    driver: bridge
+
+volumes:
+  postgres-data:
+  redis-data:
+  portainer-data:
+
+services:
+
+  todo:
+    image: ${PYTHON_IMAGE}
+    command:
+      - /bin/sh
+      - -c
+      - |
+        ./manage.py migrate
+        ./manage.py collectstatic --noinput
+        ./manage.py runserver 0.0.0.0:8000
+    restart: on-failure
+    env_file:
+      - todo/develop.env
+    ports:
+      - 8000:8000
+    volumes:
+      - ../todo:/usr/src/todo/
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - network
