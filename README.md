@@ -7,17 +7,11 @@ Some examples contain Vagrant file which simplify creation of virtual machine fo
 If Dockerfile, docker-compose.yml files for some software are missing and you need them just open pull request and I will add them asap. 
 Any contributors are welcome!
 
-## Docker & Docker-Compose installation
-``` 
-https://docs.docker.com/install/linux/docker-ce/
-https://github.com/docker/compose/releases
-```
-
-## VirtualBox & Vagrant installation
-``` 
-https://www.virtualbox.org/wiki/Downloads
-https://www.vagrantup.com/docs/installation/
-```
+## Installation
+* [docker](./readme/DOCKER_INSTALLATION.md)
+* [docker-compose](./readme/DOCKER_COMPOSE_INSTALLATION.md)
+* [virtualbox](./readme/VIRTUALBOX.md)
+* [vagrant](./readme/VAGRANT.md)
 
 ## Available docker examples 
 * [Elasticsearch](https://github.com/twistedFantasy/dockerX/tree/master/elasticsearch) is a search engine based on the Lucene library. It provides a distributed, multitenant-capable full-text search engine with an HTTP web interface and schema-free JSON documents. Elasticsearch is developed in Java. Following an open-core business model, parts of the software are licensed under various open-source licenses (mostly the Apache License), while other parts fall under the commercial (source-available) Elastic License. Official clients are available in Java, .NET (C#), PHP, Python, Apache Groovy, Ruby and many other languages. According to the DB-Engines ranking, Elasticsearch is the most popular enterprise search engine followed by Apache Solr, also based on Lucene.<br/>
