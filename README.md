@@ -2,8 +2,9 @@
 
 The goal of this repository is to provide huge amount of examples for using docker with different software products like
 PostgreSQL, Nginx, Elasticsearch and etc. Examples contains version for local usage during development and configurations
-for Docker Swarm. In order to use these examples it's recommended to have at least `18.06.1` version of docker installed. 
+for Docker Swarm. In order to use these examples it's recommended to have at least `19.03.5` version of docker installed. 
 Some examples contain Vagrant file which simplify creation of virtual machine for you with needed version of docker installed.
+If Dockerfile, docker-compose.yml files for some software are missing and you need them just open pull request and I will add them asap. 
 Any contributors are welcome!
 
 ## Docker & Docker-Compose installation
@@ -34,9 +35,3 @@ https://www.vagrantup.com/docs/installation/
 * [RabbitMQ](https://github.com/twistedFantasy/dockerX/tree/master/rabbitmq) is an open-source message-broker software (sometimes called message-oriented middleware) that originally implemented the Advanced Message Queuing Protocol (AMQP) and has since been extended with a plug-in architecture to support Streaming Text Oriented Messaging Protocol (STOMP), Message Queuing Telemetry Transport (MQTT), and other protocols.<br/>
 
 * [Redis](https://github.com/twistedFantasy/dockerX/tree/master/redis) is an in-memory data structure project implementing a distributed, in-memory key-value database with optional durability. Redis supports different kinds of abstract data structures, such as strings, lists, maps, sets, sorted sets, HyperLogLogs, bitmaps, streams, and spatial indexes. The project is mainly developed by Salvatore Sanfilippo and as of 2019, is sponsored by Redis Labs. It is open-source software released under a BSD 3-clause license.<br/>
-
-
-## Docker official sandbox
-```
-https://labs.play-with-docker.com/
-```
