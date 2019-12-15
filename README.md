@@ -1,10 +1,14 @@
-# dockerX
+# docker = ❤️
 
 The goal of this repository is to provide huge amount of examples for using docker with different software products like
 PostgreSQL, Nginx, Elasticsearch and etc. Examples contains version for local usage during development and configurations
 for Docker Swarm. In order to use these examples it's recommended to have at least `19.03.5` version of docker installed. 
 Some examples contain Vagrant file which simplify creation of virtual machine for you with needed version of docker installed.
 If Dockerfile, docker-compose.yml files for some software are missing and you need them just open pull request and I will add them asap. 
+I have big amount of raw examples which was used in different projects, but don't have enough time to make them clear enough for this repository.
+From my point of view even current examples aren't good enough, but it will definitely be better soon!
+I have a huge passion to help other engineers solve their difficulties related to Docker,
+so don't worry about annoying me to provide some example :)
 Any contributors are welcome!
 
 ## Installation
