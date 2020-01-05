@@ -10,4 +10,4 @@ docker stack deploy --with-registry-auth -c=docker-stack.yml twistedfantasy-rabb
 docker stack deploy --with-registry-auth -c=docker-stack-management.yml twistedfantasy-rabbitmq-management
 ```
 
-[RabbitMQ docker image on docker hub](https://hub.docker.com/_/rabbitmq)
+[Image on docker hub](https://hub.docker.com/_/rabbitmq)

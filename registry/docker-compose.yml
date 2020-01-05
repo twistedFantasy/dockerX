@@ -1,0 +1,21 @@
+version: '3.7'
+
+networks:
+  network:
+
+volumes:
+  registry-data:
+
+services:
+  registry:
+    image: "registry:2.7.1"
+    environment:
+      - "REGISTRY_HTTP_ADDR=0.0.0.0:5000"
+    ports:
+      - target: 5000
+        published: 5000
+        protocol: tcp
+    volumes:
+      - registry-data:/var/lib/registry
+    networks:
+      - network
