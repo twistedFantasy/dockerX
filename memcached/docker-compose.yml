@@ -1,0 +1,12 @@
+version: '3.7'
+
+networks:
+  network:
+
+services:
+  memcached:
+    image: "memcached:1.5.20-alpine"
+    ports:
+      - "11211:11211"
+    networks:
+      - network
