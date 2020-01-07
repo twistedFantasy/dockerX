@@ -41,6 +41,12 @@ Any contributors are welcome!
  Classified as a NoSQL database program, MongoDB uses JSON-like documents with schema. MongoDB is developed by MongoDB Inc. and licensed
  under the Server Side Public License (SSPL).[ >>> www.mongodb.com](https://www.mongodb.com/)<br/>
 
+* [RethinkDB](https://github.com/twistedFantasy/dockerX/tree/master/rethinkdb) is a free and open-source, distributed document-oriented database
+ originally created by the company of the same name. The database stores JSON documents with dynamic schemas, and is designed to facilitate
+ pushing real-time updates for query results to applications. Initially seed funded by Y Combinator in June 2009, the company announced
+ in October 2016 that it had been unable to build a sustainable business and its products would in future be entirely open-sourced without commercial support.
+ [ >>> www.rethinkdb.com](https://rethinkdb.com/)<br/>
+
 * [MySQL](https://github.com/twistedFantasy/dockerX/tree/master/mysql) is an open-source relational database management system (RDBMS).
  Its name is a combination of "My", the name of co-founder Michael Widenius's daughter, and "SQL", the abbreviation for Structured Query Language.
  [ >>> www.mysql.com](https://www.mysql.com/)<br/>

@@ -1,8 +1,10 @@
-[Memcached](https://memcached.org/) is a general-purpose distributed memory caching system. It is often used to speed up dynamic database-driven
-websites by caching data and objects in RAM to reduce the number of times an external data source (such as a database or API) must be read.
-Memcached's APIs provide a very large hash table distributed across multiple machines. When the table is full, subsequent inserts
-cause older data to be purged in least recently used order. Applications using Memcached typically layer requests and additions
-into RAM before falling back on a slower backing store, such as a database.
+What is [Memcached](https://memcached.org/)?
+Free & open source, high-performance, distributed memory object caching system, generic in nature, 
+but intended for use in speeding up dynamic web applications by alleviating database load.<br/>
+Memcached is an in-memory key-value store for small chunks of arbitrary data (strings, objects) from 
+results of database calls, API calls, or page rendering..<br/>
+Memcached is simple yet powerful. Its simple design promotes quick deployment, ease of development,
+and solves many problems facing large data caches. Its API is available for most popular languages..<br/>
 
 ### Local Development
 1/ Start memcached
@@ -199,5 +201,6 @@ Removing network twistedfantasy-memcached_network
 9/ Leave [docker swarm](../readme/DOCKER_SWARM.md)
 
 ### Useful resources: <br/>
-* [Image on docker hub](https://hub.docker.com/_/memcached)
-* [Official website](https://memcached.org/)
+* [hub.docker.com](https://hub.docker.com/_/memcached)
+* [github.com](https://github.com/memcached/memcached)
+* [official website](https://memcached.org/)
