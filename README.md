@@ -67,6 +67,12 @@ Any contributors are welcome!
  is sponsored by Redis Labs. It is open-source software released under a BSD 3-clause license.
  [ >>> www.redis.io](https://redis.io/)<br/>
 
+* [Memcached](https://github.com/twistedFantasy/dockerX/tree/master/memcached), (pronunciation: mem-cashed, mem-cash-dee) is a general-purpose
+ distributed memory-caching system. It is often used to speed up dynamic database-driven websites by caching data and objects in RAM to reduce the number
+  of times an external data source (such as a database or API) must be read. Memcached is free and open-source software, licensed under the Revised BSD license.
+  Memcached runs on Unix-like operating systems (at least Linux and OS X) and on Microsoft Windows. It depends on the libevent library.
+ [ >>> www.memcached.org](https://memcached.org/)
+
 * [Let's Encrypt](https://github.com/twistedFantasy/dockerX/tree/master/lets-encrypt) Let's Encrypt is a non-profit certificate authority run
  by Internet Security Research Group (ISRG) that provides X.509 certificates for Transport Layer Security (TLS) encryption at no charge.
  The certificate is valid for 90 days, during which renewal can take place at any time. The offer is accompanied by an automated process designed
