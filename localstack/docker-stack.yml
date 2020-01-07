@@ -1,0 +1,53 @@
+version: '3.7'
+
+networks:
+  network:
+    driver: overlay
+
+volumes:
+  localstack-data:
+
+services:
+  localstack:
+    image: "localstack/localstack:0.10.7"
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+    environment:
+      - SERVICES=${SERVICES-sqs,sns,s3,redshift,ec2,iam,lambda}
+      - HOSTNAME=${HOSTNAME-localhost}
+      - HOSTNAME_EXTERNAL=${HOSTNAME_EXTERNAL-localhost}
+      - DEFAULT_REGION=${DEFAULT_REGION-us-east-1}
+      - DEBUG=${DEBUG-1}
+      - DATA_DIR=${DATA_DIR-/tmp/localstack/data}
+      - PORT_WEB_UI=${PORT_WEB_UI-8080}
+      - DOCKER_HOST=unix:///var/run/docker.sock
+    ports:
+      - "4567-4584:4567-4584"
+      - "${PORT_WEB_UI-8080}:${PORT_WEB_UI-8080}"
+    volumes:
+      - localstack-data:/tmp/localstack
+    networks:
+      - network
+
+  awscli:
+    image: "xueshanf/awscli"
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+      restart_policy:
+        condition: on-failure
+    command:
+      - "bash"
+      - "-c"
+      - |
+        curl -s -o /dev/null --retry 20 --retry-connrefused http://localstack:4576
+        AWS_ACCESS_KEY_ID=none AWS_SECRET_ACCESS_KEY=none aws --endpoint-url=http://localstack:4576 --region=eu-west-1 sqs create-queue --queue-name=test-localstack-queue --attributes MessageRetentionPeriod=3600,ReceiveMessageWaitTimeSeconds=10,VisibilityTimeout=300
+        AWS_ACCESS_KEY_ID=none AWS_SECRET_ACCESS_KEY=none aws --endpoint-url=http://localstack:4572 --region=eu-west-1 s3api create-bucket --bucket=test-localstack-bucket --acl=public-read
+        AWS_ACCESS_KEY_ID=none AWS_SECRET_ACCESS_KEY=none aws --endpoint-url=http://localstack:4575 --region=eu-west-1 sns create-topic --name=test-localstack-topic
+    depends_on:
+      - localstack
+    networks:
+      - network

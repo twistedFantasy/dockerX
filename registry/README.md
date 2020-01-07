@@ -96,4 +96,4 @@ $ docker stack rm twistedfantasy-registry
 ### Useful resources: <br/>
 * [Docker Registry Overview](https://docs.docker.com/registry/)
 * [Image on docker hub](https://hub.docker.com/_/registry)
-* [Docker Distribution github](https://github.com/docker/distribution)
+* [Distribution on github](https://github.com/docker/distribution)

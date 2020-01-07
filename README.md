@@ -18,6 +18,11 @@ Any contributors are welcome!
 * [docker swarm](./readme/DOCKER_SWARM.md)
 
 ## Available docker examples 
+* [LocalStack](https://github.com/twistedFantasy/dockerX/tree/master/localstack) LocalStack provides an easy-to-use test/mocking framework
+ for developing Cloud applications. It spins up a testing environment on your local machine that provides the same functionality and
+ APIs as the real AWS cloud environment.
+ [ >>> www.localstack.cloud](https://localstack.cloud)<br/>
+
 * [Elasticsearch](https://github.com/twistedFantasy/dockerX/tree/master/elasticsearch) is a search engine based on the Lucene library.
  It provides a distributed, multitenant-capable full-text search engine with an HTTP web interface and schema-free JSON documents.
  Elasticsearch is developed in Java. Following an open-core business model, parts of the software are licensed under various
