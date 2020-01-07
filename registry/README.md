@@ -1,5 +1,5 @@
 Docker Registry HTTP API V2 is used for storing your docker images outside of official [docker hub](https://hub.docker.com/)
-in your own copy of this service on your hardware maintainable with care and love :) 
+in your own copy of this service on your hardware maintainable with care and love :)
 
 ### Local Development
 1/ Start registry
@@ -13,7 +13,7 @@ Creating registry_registry_1 ... done
 2/ Check that registry is up and running
 ```
 $ docker-compose -f docker-compose.yml ps
-       Name                      Command               State           Ports         
+       Name                      Command               State           Ports
 -------------------------------------------------------------------------------------
 registry_registry_1   /entrypoint.sh /etc/docker ...   Up      0.0.0.0:5000->5000/tcp
 ```
@@ -63,7 +63,7 @@ twistedfantasy-registry   1                   Swarm
 ```
 $ docker stack ps twistedfantasy-registry
 ID                  NAME                                 IMAGE               NODE                DESIRED STATE       CURRENT STATE                ERROR               PORTS
-t14gg9t661eh        twistedfantasy-registry_registry.1   registry:2.7.1      dekabrist           Running             Running about a minute ago 
+t14gg9t661eh        twistedfantasy-registry_registry.1   registry:2.7.1      dekabrist           Running             Running about a minute ago
 ```
 
 5/ Check list of services in the stack
@@ -89,7 +89,7 @@ $ docker pull 127.0.0.1:5000/alpine
 8/ Bring the stack down
 ```
 $ docker stack rm twistedfantasy-registry
-``` 
+```
 
 9/ Leave [docker swarm](../readme/DOCKER_SWARM.md)
 
