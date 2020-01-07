@@ -1,3 +1,8 @@
+[LocalStack](https://localstack.cloud/) provides an easy-to-use test/mocking framework for developing Cloud applications.
+It spins up a testing environment on your local machine that provides the same functionality and APIs as the real AWS cloud environment.<br/>
+Yes, that's true - you can run your Lambda functions, store data to DynamoDB tables, feed events through Kinesis streams, 
+put your application behind an API Gateway, and much more. And all this happens on your local machine, without ever talking to the cloud.<br/>
+
 LocalStack spins up the following core Cloud APIs on your local machine:
 * API Gateway at http://localhost:4567
 * Kinesis at http://localhost:4568
@@ -87,6 +92,7 @@ localstack_1  | 11:51:12.871 [elasticmq-akka.actor.default-dispatcher-4] INFO  o
 localstack_1  | 2020-01-07T11:51:14:WARNING:infra.py: Service "s3" not yet available, retrying...
 localstack_1  | 2020-01-07 11:51:14,987:API: 127.0.0.1 - - [07/Jan/2020 11:51:14] "PUT /test-localstack-bucket HTTP/1.1" 200 -
 ...
+localstack_1  | Ready.
 ```
 
 4/ Check output from awscli in order to get created aws resources urls
@@ -185,6 +191,7 @@ $ docker service logs -f twistedfantasy-localstack_localstack
 | 11:55:30.328 [elasticmq-akka.actor.default-dispatcher-2] INFO  akka.event.slf4j.Slf4jLogger - Slf4jLogger started
 | Waiting for all LocalStack services to be ready
 ...
+| Ready.
 ```
 
 7/ Check logs of awscli service
@@ -209,5 +216,6 @@ Removing network twistedfantasy-localstack_network
 9/ Leave [docker swarm](../readme/DOCKER_SWARM.md)
 
 ### Useful resources: <br/>
-* [Image on docker hub](https://hub.docker.com/r/localstack/localstack)
-* [LocalStack on github](https://github.com/localstack/localstackn)
+* [hub.docker.com](https://hub.docker.com/r/localstack/localstack)
+* [github.com](https://github.com/localstack/localstack)
+* [official website](https://localstack.cloud/)

@@ -18,6 +18,7 @@ services:
       - DATA_DIR=${DATA_DIR-/tmp/localstack/data}
       - PORT_WEB_UI=${PORT_WEB_UI-8080}
       - DOCKER_HOST=unix:///var/run/docker.sock
+      - FORCE_NONINTERACTIVE=1
     ports:
       - "4567-4584:4567-4584"
       - "${PORT_WEB_UI-8080}:${PORT_WEB_UI-8080}"
