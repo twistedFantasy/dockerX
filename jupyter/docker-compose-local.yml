@@ -2,7 +2,6 @@ version: '3.7'
 
 networks:
   network:
-    driver: bridge
 
 services:
     simple_demo:
