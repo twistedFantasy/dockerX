@@ -21,7 +21,7 @@ $ docker-compose -f docker-compose.yml ps
 rethinkdb_rethinkdb_1   rethinkdb --bind all   Up      28015/tcp, 29015/tcp, 0.0.0.0:8080->8080/tcp
 ```
 
-3/ Open `localhost:8080` in browser to check rethinkdb UI
+3/ Visit `localhost:8080` in your favourite browser to check rethinkdb UI
 ![RethinkDB UI](./rethinkdb.png)
 
 4/ Stop rethinkdb
@@ -75,7 +75,7 @@ qfkheq29yxjp        twistedfantasy-rethinkdb_rethinkdb   replicated          1/1
 $ docker service logs -f twistedfantasy-rethinkdb_rethinkdb
 ```
 
-7/ Open `127.0.0.1:8080` in browser to check rethinkdb UI
+7/ Visit `127.0.0.1:8080` in your favourite browser to check rethinkdb UI
 ![RethinkDB UI](./rethinkdb.png)
 
 8/ Bring the stack down
