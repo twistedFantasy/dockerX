@@ -88,3 +88,7 @@ Any contributors are welcome!
 * [Docker Registry](https://github.com/twistedFantasy/dockerX/tree/master/registry) This image contains an implementation of the Docker
  Registry HTTP API V2 for use with Docker 1.6+. See github.com/docker/distribution for more details about what it is.
  [ >>> docs.docker.com/registry/](https://docs.docker.com/registry/)<br/>
+
+* [Metabase](https://github.com/twistedFantasy/dockerX/tree/master/metabase) Metabase is the easy, open source way for everyone
+ in your company to ask questions and learn from data.
+ [ >>> www.metabase.com](https://www.metabase.com/)

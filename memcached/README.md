@@ -4,7 +4,7 @@ but intended for use in speeding up dynamic web applications by alleviating data
 Memcached is an in-memory key-value store for small chunks of arbitrary data (strings, objects) from 
 results of database calls, API calls, or page rendering..<br/>
 Memcached is simple yet powerful. Its simple design promotes quick deployment, ease of development,
-and solves many problems facing large data caches. Its API is available for most popular languages..<br/>
+and solves many problems facing large data caches. Its API is available for most popular languages.<br/>
 
 ### Local Development
 1/ Start memcached
@@ -102,7 +102,7 @@ Removing network memcached_network
 
 1/ Create [docker swarm](../readme/DOCKER_SWARM.md)
 
-2/ Deploy memached service in docker swarm
+2/ Deploy memcached service in docker swarm
 ```
 $ docker stack deploy -c docker-stack.yml twistedfantasy-memcached
 Creating network twistedfantasy-memcached_network
