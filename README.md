@@ -23,6 +23,12 @@ Any contributors are welcome!
  APIs as the real AWS cloud environment.
  [ >>> www.localstack.cloud](https://localstack.cloud)<br/>
 
+* [Prometheus](https://github.com/twistedFantasy/dockerX/tree/master/prometheus) Prometheus is a free software application used for event monitoring
+ and alerting. It records real-time metrics in a time series database (allowing for high dimensionality) built using a HTTP pull model,
+ with flexible queries and real-time alerting. The project is written in Go and licensed under the Apache 2 License, with source code available on GitHub,
+ and is a graduated project of the Cloud Native Computing Foundation, along with Kubernetes and Envoy.
+ [ >>> www.prometheus.io](https://prometheus.io/)<br/>
+
 * [Elasticsearch](https://github.com/twistedFantasy/dockerX/tree/master/elasticsearch) is a search engine based on the Lucene library.
  It provides a distributed, multitenant-capable full-text search engine with an HTTP web interface and schema-free JSON documents.
  Elasticsearch is developed in Java. Following an open-core business model, parts of the software are licensed under various
@@ -77,7 +83,14 @@ Any contributors are welcome!
  distributed memory-caching system. It is often used to speed up dynamic database-driven websites by caching data and objects in RAM to reduce the number
   of times an external data source (such as a database or API) must be read. Memcached is free and open-source software, licensed under the Revised BSD license.
   Memcached runs on Unix-like operating systems (at least Linux and OS X) and on Microsoft Windows. It depends on the libevent library.
- [ >>> www.memcached.org](https://memcached.org/)
+ [ >>> www.memcached.org](https://memcached.org/)<br/>
+
+* [Nginx](https://github.com/twistedFantasy/dockerX/tree/master/nginx) (pronounced "engine X", /ˌɛndʒɪnˈɛks/ EN-jin-EKS)
+ (stylized as NGINX or nginx or NginX) is a web server which can also be used as a reverse proxy, load balancer, mail proxy and HTTP cache.
+ The software was created by Igor Sysoev and first publicly released in 2004. A company of the same name was founded in 2011 to provide
+ support and Nginx plus paid software. Nginx is free and open-source software, released under the terms of a BSD-like license.
+ A large fraction of web servers use NGINX, often as a load balancer.
+ [ >>> www.nginx.com](https://www.nginx.com/)<br/>
 
 * [Let's Encrypt](https://github.com/twistedFantasy/dockerX/tree/master/lets-encrypt) Let's Encrypt is a non-profit certificate authority run
  by Internet Security Research Group (ISRG) that provides X.509 certificates for Transport Layer Security (TLS) encryption at no charge.
@@ -91,4 +104,11 @@ Any contributors are welcome!
 
 * [Metabase](https://github.com/twistedFantasy/dockerX/tree/master/metabase) Metabase is the easy, open source way for everyone
  in your company to ask questions and learn from data.
- [ >>> www.metabase.com](https://www.metabase.com/)
+ [ >>> www.metabase.com](https://www.metabase.com/)<br/>
+
+* [matomo](https://github.com/twistedFantasy/dockerX/tree/master/matomo), formerly Piwik (pronounced /ˈpiːwiːk/), is a free and
+ open source web analytics application developed by a team of international developers, that runs on a PHP/MySQL webserver.
+ It tracks online visits to one or more websites and displays reports on these visits for analysis. As of June 2018,
+ Matomo was used by over 1,455,000 websites, or 1.3% of all websites with known traffic analysis tools,
+ and has been translated into 54 languages. New versions are released regularly.
+ [ >>> www.matomo.org/free-software/](https://matomo.org/free-software/)<br/>
