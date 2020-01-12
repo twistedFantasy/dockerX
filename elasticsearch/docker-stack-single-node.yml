@@ -9,18 +9,22 @@ volumes:
 
 services:
   elasticsearch:
-    image: "elasticsearch:7.2.0"
+    image: "elasticsearch:7.5.1"
     deploy:
       replicas: 1
       placement:
         constraints: [node.role == manager]
+    environment:
+      - discovery.type=single-node
+      - "ES_JAVA_OPTS=-Xms2g -Xmx2g"
+    ports:
+      - target: 9200
+        published: 9200
+        protocol: tcp
+      - target: 9300
+        published: 9300
+        protocol: tcp
     volumes:
       - elasticsearch-data:/usr/share/elasticsearch/data
-    environment:
-      - "ES_JAVA_OPTS=-Xms2g -Xmx2g"
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
     networks:
       - network

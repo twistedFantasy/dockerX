@@ -1,0 +1,71 @@
+version: '3.7'
+
+networks:
+  network:
+
+volumes:
+  elasticsearch01-data:
+  elasticsearch02-data:
+  elasticsearch03-data:
+
+services:
+  elasticsearch01:
+    image: "elasticsearch:7.5.1"
+    container_name: elasticsearch01
+    environment:
+      - node.name=elasticsearch01
+      - cluster.name=es-docker-cluster
+      - discovery.seed_hosts=elasticsearch02,elasticsearch03
+      - cluster.initial_master_nodes=elasticsearch01,elasticsearch02,elasticsearch03
+      - bootstrap.memory_lock=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - target: 9200
+        published: 9200
+        protocol: tcp
+    volumes:
+      - elasticsearch01-data:/usr/share/elasticsearch/data
+    networks:
+      - network
+
+  elasticsearch02:
+    image: "elasticsearch:7.5.1"
+    container_name: elasticsearch02
+    environment:
+      - node.name=elasticsearch02
+      - cluster.name=es-docker-cluster
+      - discovery.seed_hosts=elasticsearch01,elasticsearch03
+      - cluster.initial_master_nodes=elasticsearch01,elasticsearch02,elasticsearch03
+      - bootstrap.memory_lock=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - elasticsearch02-data:/usr/share/elasticsearch/data
+    networks:
+      - network
+
+  elasticsearch03:
+    image: "elasticsearch:7.5.1"
+    container_name: elasticsearch03
+    environment:
+      - node.name=elasticsearch03
+      - cluster.name=es-docker-cluster
+      - discovery.seed_hosts=elasticsearch01,elasticsearch02
+      - cluster.initial_master_nodes=elasticsearch01,elasticsearch02,elasticsearch03
+      - bootstrap.memory_lock=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - elasticsearch03-data:/usr/share/elasticsearch/data
+    networks:
+      - network
